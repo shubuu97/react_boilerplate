@@ -56,13 +56,11 @@ export const getPasswordStrength = (value) => {
     // for (let type in passwordTypes) {
     //     if (passwordTypes[type]) strength++;
     // }
-    console.log(strength, 'strength in');
     return strength;
 };
 
 export const getPasswordStrengthText = (value) => {
     const strength = isStrongPassword(value);
-    console.log(strength, 'strength');
     if (strength in PasswordStrengthText) {
         return PasswordStrengthText[strength];
     }
@@ -72,6 +70,13 @@ export const getPasswordStrengthText = (value) => {
 export const isStrongPassword = (value) => {
     const strength = getPasswordStrength(value);
     if (strength === 4) {
+        return true;
+    }
+    return false;
+};
+
+export const isValidArray = (arr) => {
+    if (arr && Array.isArray(arr) && (arr || []).length > 0) {
         return true;
     }
     return false;

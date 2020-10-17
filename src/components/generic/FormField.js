@@ -57,7 +57,6 @@ const FormField = ({
                         name={name}
                         value={value}
                         onChange={handleChange}
-                        name={name}
                         // className={
                         //     !valid && touched
                         //         ? 'formField invalidField'

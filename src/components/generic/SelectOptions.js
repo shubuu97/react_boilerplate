@@ -1,7 +1,8 @@
 import React from 'react';
+import { isValidArray } from '../../utility/CommonFunctions';
 
 const SelectOptions = ({ options, placeholder }) => {
-    if (!options || !Array.isArray(options) || !(options || []).length > 0) {
+    if (!isValidArray(options)) {
         return null;
     }
 
