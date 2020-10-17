@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SelectOptions from './SelectOptions';
 
 const FormField = ({
     element,
@@ -28,7 +29,7 @@ const FormField = ({
                         type={type}
                         placeholder={placeholder}
                         value={value}
-                        onChange={(e) => handleChange(e, id)}
+                        onChange={handleChange}
                         onKeyDown={onkeyDown}
                         disabled={disabled || false}
                         // className={
@@ -40,6 +41,35 @@ const FormField = ({
                         // }
                         // style={{ ...styles }}
                     />
+                    {!valid && touched ? (
+                        <div className="error-msg my-1">
+                            <span>{errorMessage}</span>
+                        </div>
+                    ) : null}
+                </div>
+            );
+        case 'select':
+            return (
+                <div>
+                    <label htmlFor={name}>{label}</label>
+                    <select
+                        id={id}
+                        name={name}
+                        value={value}
+                        onChange={handleChange}
+                        name={name}
+                        // className={
+                        //     !valid && touched
+                        //         ? 'formField invalidField'
+                        //         : 'formField'
+                        // }
+                        // style={{ ...styles }}
+                    >
+                        <SelectOptions
+                            options={options}
+                            placeholder={placeholder}
+                        />
+                    </select>
                     {!valid && touched ? (
                         <div className="error-msg my-1">
                             <span>{errorMessage}</span>
