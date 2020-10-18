@@ -1,13 +1,21 @@
+// External dependencies
 import React, { useReducer } from 'react';
+
+// Components
 import FormField from '../../generic/FormField';
+import PasswordStrengthIndicator from './PasswordStrengthIndicator';
+
+// Utilities
 import formFieldReducer from '../../../utility/form/reducers/FormFieldReducer';
 import formInitialState from './FormInitialState';
 import {
     INPUT_CHANGE,
-    CONFIRM_PASSWORD,
+    CONFIRM_PASSWORD_INPUT_CHANGE,
 } from '../../../utility/form/actionTypes';
-import PasswordStrengthIndicator from './PasswordStrengthIndicator';
 
+/**
+ * Account setting form
+ */
 const AccountSetting = () => {
     const [formState, dispatch] = useReducer(
         formFieldReducer,
@@ -15,42 +23,41 @@ const AccountSetting = () => {
     );
 
     const { email, password, confirmPassword } = formState || {};
+
+    /**
+     * Input change handler
+     * @param {Object} inputChangeEvent
+     * @param {String} actionType
+     */
+    const handleChange = (inputChangeEvent, actionType) => {
+        const { name, value } = inputChangeEvent?.target ?? {};
+
+        dispatch({
+            type: actionType,
+            name,
+            value,
+        });
+    };
+
     return (
         <div>
             <form>
                 <FormField
                     {...email}
-                    handleChange={(event) => {
-                        const { name, value } = event?.target ?? {};
-                        dispatch({
-                            type: INPUT_CHANGE,
-                            name,
-                            value,
-                        });
-                    }}
+                    handleChange={(event) => handleChange(event, INPUT_CHANGE)}
                 />
+
                 <FormField
                     {...password}
-                    handleChange={(event) => {
-                        const { name, value } = event?.target ?? {};
-                        dispatch({
-                            type: INPUT_CHANGE,
-                            name,
-                            value,
-                        });
-                    }}
+                    handleChange={(event) => handleChange(event, INPUT_CHANGE)}
                 />
-                <PasswordStrengthIndicator data={password} />
+                <PasswordStrengthIndicator password={password} />
+
                 <FormField
                     {...confirmPassword}
-                    handleChange={(event) => {
-                        const { name, value } = event?.target ?? {};
-                        dispatch({
-                            type: CONFIRM_PASSWORD,
-                            name,
-                            value,
-                        });
-                    }}
+                    handleChange={(event) =>
+                        handleChange(event, CONFIRM_PASSWORD_INPUT_CHANGE)
+                    }
                 />
             </form>
         </div>

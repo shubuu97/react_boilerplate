@@ -1,8 +1,11 @@
+// Utilities
 import CountryList from '../../../utility/CountryList.json';
 
+/**
+ * User information form initial form state object
+ */
 const FormInitialState = {
     firstName: {
-        element: 'input',
         id: 'firstName',
         name: 'firstName',
         type: 'text',
@@ -17,7 +20,6 @@ const FormInitialState = {
         errorMessage: 'Name must be 3 characters long!',
     },
     lastName: {
-        element: 'input',
         id: 'lastName',
         name: 'lastName',
         type: 'text',
@@ -32,7 +34,6 @@ const FormInitialState = {
         errorMessage: 'Name must be 3 characters long!',
     },
     address: {
-        element: 'input',
         id: 'address',
         name: 'address',
         type: 'text',

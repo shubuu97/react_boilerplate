@@ -1,3 +1,4 @@
+// Utilities
 import {
     isEmail,
     isEmpty,
@@ -5,12 +6,12 @@ import {
     hasMaxLength,
     isStrongPassword,
 } from './CommonFunctions';
+
 /**
  *
- * @param {String} value - input value
- * @param {Object} rules - an object that contains properties similar to the cases (eg: isEmail)
+ * @param {String | number} value Input value
+ * @param {Object} rules Validation rules
  */
-
 const Validator = (value, rules) => {
     let isValid = true;
     for (let rule in rules) {

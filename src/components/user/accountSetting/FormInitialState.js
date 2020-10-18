@@ -1,6 +1,8 @@
+/**
+ * Account setting form initial form state object
+ */
 const FormInitialState = {
     email: {
-        element: 'input',
         id: 'email',
         name: 'email',
         type: 'email',
@@ -15,10 +17,9 @@ const FormInitialState = {
         errorMessage: 'Please enter a valid email!',
     },
     password: {
-        element: 'input',
         id: 'password',
         name: 'password',
-        type: 'password',
+        type: 'text',
         label: 'Password',
         placeholder: 'Enter your password',
         touched: false,
@@ -31,7 +32,6 @@ const FormInitialState = {
             'Password must include uppercase letters, lowercase letters, numbers and special characters!',
     },
     confirmPassword: {
-        element: 'input',
         id: 'confirmPassword',
         name: 'confirmPassword',
         type: 'password',

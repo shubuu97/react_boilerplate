@@ -1,3 +1,6 @@
+/**
+ * Map of password strength text with value
+ */
 export const PasswordStrengthText = {
     1: 'Weak',
     2: 'Medium',
@@ -5,7 +8,10 @@ export const PasswordStrengthText = {
     4: 'Strong',
 };
 
+/**
+ * Tabs data array
+ */
 export const TabsData = [
-    { value: 1, name: 'Account Setting' },
-    { value: 2, name: 'User Info' },
+    { name: 'Account Setting', value: 1 },
+    { name: 'User Info', value: 2 },
 ];

@@ -1,19 +1,39 @@
+// External Dependencies
 import React, { useState } from 'react';
+
+// Components
 import AccountSetting from './accountSetting';
 import UserInfo from './userInfo';
 import Tabs from './tabs';
-import { TabsData } from '../../utility/constants';
 
+// Utilities
+import { TabsData } from '../../utility/Constants';
+
+/**
+ * Forms mapping
+ * To select which form to render depending upon the selected tab
+ */
+const FormsMap = {
+    1: AccountSetting,
+    2: UserInfo,
+};
+
+/**
+ * User component
+ *
+ * Contains Account setting and User information forms in tab view
+ */
 const User = () => {
-    const [tabValue, setTabValue] = useState(1);
+    const [selectedTab, setSelectedTab] = useState(1);
 
+    const ActiveForm = FormsMap[selectedTab];
     return (
         <div>
             <Tabs
                 tabsData={TabsData}
-                handleTabClick={(tabValue) => setTabValue(tabValue)}
+                handleTabClick={(selectedTab) => setSelectedTab(selectedTab)}
             />
-            {tabValue === 1 ? <AccountSetting /> : <UserInfo />}
+            <ActiveForm />
         </div>
     );
 };

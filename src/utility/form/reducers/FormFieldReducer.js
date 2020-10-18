@@ -1,10 +1,14 @@
+// Utilities
 import validator from '../../Validator';
-import { INPUT_CHANGE, CONFIRM_PASSWORD } from '../actionTypes';
+import { INPUT_CHANGE, CONFIRM_PASSWORD_INPUT_CHANGE } from '../actionTypes';
 
 /**
- * This reducer can be called onChange of input fields with type "INPUT CHANGE" and for emailPhone input, type will be "EMAIL_PHONE_CHANGE"
- * @param {Object} state - form state
- * @param {Object} action - action with type and payload
+ * Form field reducer
+ *
+ * @param {Object} state Form state
+ * @param {Object} action Action object with name, value and type
+ *
+ * @returns {Object} Updated state object
  */
 
 const FormFieldReducer = (state = {}, action) => {
@@ -24,7 +28,8 @@ const FormFieldReducer = (state = {}, action) => {
                     valid: validator(value, validationRules),
                 },
             };
-        case CONFIRM_PASSWORD:
+
+        case CONFIRM_PASSWORD_INPUT_CHANGE:
             const password = state?.password?.value ?? '';
             return {
                 ...state,
@@ -35,6 +40,7 @@ const FormFieldReducer = (state = {}, action) => {
                     valid: value === password,
                 },
             };
+
         default:
             return state;
     }
