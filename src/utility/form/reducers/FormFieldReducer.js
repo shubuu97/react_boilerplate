@@ -1,6 +1,10 @@
 // Utilities
 import validator from '../../Validator';
-import { INPUT_CHANGE, CONFIRM_PASSWORD_INPUT_CHANGE } from '../actionTypes';
+import {
+    INPUT_CHANGE,
+    CONFIRM_PASSWORD_INPUT_CHANGE,
+    PASSWORD_INPUT_CHANGE,
+} from '../actionTypes';
 
 /**
  * Form field reducer
@@ -29,8 +33,28 @@ const FormFieldReducer = (state = {}, action) => {
                 },
             };
 
+        case PASSWORD_INPUT_CHANGE:
+            const confirmPasswordObj = state?.confirmPassword ?? {};
+            const confirmPasswordValue = confirmPasswordObj?.value ?? '';
+            const isConfirmPasswordValid = confirmPasswordValue === value;
+
+            return {
+                ...state,
+                [name]: {
+                    ...fieldData,
+                    value,
+                    touched: true,
+                    valid: validator(value, validationRules),
+                },
+                confirmPassword: {
+                    ...confirmPasswordObj,
+                    valid: isConfirmPasswordValid,
+                },
+            };
+
         case CONFIRM_PASSWORD_INPUT_CHANGE:
             const password = state?.password?.value ?? '';
+
             return {
                 ...state,
                 [name]: {

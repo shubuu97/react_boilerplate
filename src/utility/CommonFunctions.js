@@ -18,7 +18,7 @@ import { INPUT_CHANGE } from './form/actionTypes';
 import { PasswordStrengthText } from './Constants';
 
 /**
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {Boolean}
  */
@@ -27,7 +27,7 @@ export const isEmpty = (value) => {
 };
 
 /**
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {Boolean}
  */
@@ -36,8 +36,8 @@ export const isEmail = (value) => {
 };
 
 /**
- * @param {string} value
- * @param {number} minLength
+ * @param {string}* value
+ * @param {number}* minLength
  *
  * @returns {Boolean}
  */
@@ -46,9 +46,8 @@ export const hasMinLength = (value, minLength) => {
 };
 
 /**
- * Checks if the string has
- * @param {string} value
- * @param {number} maxLength
+ * @param {string}* value
+ * @param {number}* maxLength
  *
  * @returns {Boolean}
  */
@@ -57,7 +56,7 @@ export const hasMaxLength = (value, maxLength) => {
 };
 
 /**
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {Boolean}
  */
@@ -66,7 +65,7 @@ export const hasUpperCaseLetters = (value) => {
 };
 
 /**
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {Boolean}
  */
@@ -75,7 +74,7 @@ export const hasLowerCaseLetters = (value) => {
 };
 
 /**
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {Boolean}
  */
@@ -84,7 +83,7 @@ export const hasNumbers = (value) => {
 };
 
 /**
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {Boolean}
  */
@@ -94,7 +93,8 @@ export const hasSpecialChars = (value) => {
 
 /**
  * Calculates password strength
- * @param {string} value
+ *
+ * @param {string}* value
  *
  * @returns {number} Password strength between 1 to 4
  */
@@ -116,7 +116,7 @@ export const getPasswordStrength = (value) => {
 };
 
 /**
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {string} Password strength value to show, eg: Easy, Medium etc
  */
@@ -132,7 +132,7 @@ export const getPasswordStrengthText = (value) => {
 /**
  * Matches password strength with 4 to check if it is strong or not
  *
- * @param {string} value
+ * @param {string}* value
  *
  * @returns {Boolean}
  */
@@ -147,7 +147,7 @@ export const isStrongPassword = (value) => {
 /**
  * Checks if an array is valid or not
  *
- * @param {Array} arr
+ * @param {Array}* arr
  *
  * @returns {Boolean}
  */
@@ -161,8 +161,8 @@ export const isValidArray = (arr) => {
 /**
  * Renders form fields
  *
- * @param {Object} formState Form state object
- * @param {func} dispatch
+ * @param {Object}* formState Form state object
+ * @param {func}* dispatch
  * @param {Array} formFieldsKeysArray Array of keys to render form fields in a particular order otherwise it will be shown in ascending order
  */
 export const renderFormFields = (formState, dispatch, formFieldsKeysArray) => {
@@ -199,4 +199,21 @@ export const renderFormFields = (formState, dispatch, formFieldsKeysArray) => {
 
         return null;
     });
+};
+
+/**
+ * Creates request body from form state
+ *
+ * @param {Object}* formState
+ */
+export const createReqBody = (formState) => {
+    let reqBody = {};
+    if (formState) {
+        let formFields = Object.keys(formState);
+
+        formFields.forEach((key) => {
+            reqBody[key] = formState[key].value;
+        });
+    }
+    return reqBody;
 };

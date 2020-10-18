@@ -26,7 +26,7 @@ const FormInitialState = {
         valid: false,
         value: '',
         validationRules: {
-            isPassword: true,
+            isStrongPassword: true,
         },
         errorMessage:
             'Password must include uppercase letters, lowercase letters, numbers and special characters!',
@@ -44,7 +44,6 @@ const FormInitialState = {
             minLength: 6,
         },
         errorMessage: 'Password do not match!',
-        doesMatch: false,
     },
 };
 

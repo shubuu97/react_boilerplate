@@ -14,6 +14,7 @@ import {
  */
 const Validator = (value, rules) => {
     let isValid = true;
+
     for (let rule in rules) {
         switch (rule) {
             case 'required':
@@ -22,7 +23,7 @@ const Validator = (value, rules) => {
             case 'isEmail':
                 isValid = isValid && isEmail(value);
                 break;
-            case 'isPassword':
+            case 'isStrongPassword':
                 isValid = isValid && isStrongPassword(value);
                 break;
             case 'minLength':
