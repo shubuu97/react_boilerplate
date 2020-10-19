@@ -208,6 +208,7 @@ export const renderFormFields = (formState, dispatch, formFieldsKeysArray) => {
  */
 export const createReqBody = (formState) => {
     let reqBody = {};
+
     if (formState) {
         let formFields = Object.keys(formState);
 
@@ -215,5 +216,21 @@ export const createReqBody = (formState) => {
             reqBody[key] = formState[key].value;
         });
     }
+
     return reqBody;
+};
+
+export const mapStateWithStore = (formState, data) => {
+    let updatedFormState = {};
+
+    for (let formField in formState) {
+        updatedFormState = {
+            ...updatedFormState,
+            [formField]: {
+                ...formState[formField],
+                value: data[formField],
+            },
+        };
+    }
+    return updatedFormState;
 };

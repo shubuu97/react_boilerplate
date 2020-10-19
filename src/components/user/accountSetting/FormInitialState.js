@@ -19,7 +19,7 @@ const FormInitialState = {
     password: {
         id: 'password',
         name: 'password',
-        type: 'text',
+        type: 'password',
         label: 'Password',
         placeholder: 'Enter your password',
         touched: false,

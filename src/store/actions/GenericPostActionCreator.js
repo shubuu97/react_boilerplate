@@ -35,7 +35,16 @@ const genericPostActionCreator = (
         try {
             const result = await axios.post(BASE_URL + api, reqBody);
 
-            const { data, status } = result;
+            let { data, status } = result;
+
+            // Empty password and confirmPassword in when updating account settings
+            if (identifier === 'UPDATE_ACCOUNT_SETTINGS') {
+                data = {
+                    ...data,
+                    password: '',
+                    confirmPassword: '',
+                };
+            }
 
             dispatch({
                 type: `${identifier}_SUCCESS`,

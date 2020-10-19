@@ -1,14 +1,16 @@
 // External dependencies
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 // Utilities
-import formFieldReducer from '../../../utility/form/reducers/FormFieldReducer';
+import formReducer from '../../../utility/form/reducers/FormReducer';
 import {
     renderFormFields,
     createReqBody,
+    mapStateWithStore,
 } from '../../../utility/CommonFunctions';
-import { UPDATE_DATA } from '../../../utility/Api';
+import { UPDATE_DATA_API } from '../../../utility/Api';
+import { MAP_STATE_WITH_STORE } from '../../../utility/form/actionTypes';
 
 import genericPostActionCreator from '../../../store/actions/GenericPostActionCreator';
 import { UPDATE_USER_INFO } from '../../../store/action_types';
@@ -18,26 +20,37 @@ import formInitialState from './FormInitialState';
  * User information form
  */
 const UserInfo = () => {
-    const [formState, dispatch] = useReducer(
-        formFieldReducer,
-        formInitialState,
-    );
+    const [formState, dispatch] = useReducer(formReducer, formInitialState);
 
-    const { isLoading, success, message } = useSelector(
+    const storeDispatch = useDispatch();
+
+    const { data, isLoading, success, message } = useSelector(
         (state) => state?.userInfo ?? {},
         shallowEqual,
     );
 
-    const storeDispatch = useDispatch();
+    useEffect(() => {
+        // Do not update state in loading state
+        if (!isLoading) {
+            const updatedFormState = mapStateWithStore(formState, data);
 
-    const updateDataHandler = () => {
+            dispatch({
+                type: MAP_STATE_WITH_STORE,
+                updatedFormState,
+            });
+        }
+    }, [data]);
+
+    const updateFormData = (formEvent) => {
+        formEvent.preventDefault();
+
         const reqBody = createReqBody(formState);
         const successMsg = 'User Information Updated Successfully!';
 
         storeDispatch(
             genericPostActionCreator(
                 UPDATE_USER_INFO,
-                UPDATE_DATA,
+                UPDATE_DATA_API,
                 reqBody,
                 successMsg,
             ),
@@ -48,12 +61,11 @@ const UserInfo = () => {
 
     return (
         <div>
-            <div>{renderFormFields(formState, dispatch, formFieldsOrder)}</div>
-            {isLoading ? (
-                'Loading...'
-            ) : (
-                <button onClick={updateDataHandler}>UPDATE</button>
-            )}
+            <form onSubmit={updateFormData}>
+                {renderFormFields(formState, dispatch, formFieldsOrder)}
+                {isLoading ? 'Loading...' : <button>UPDATE</button>}
+            </form>
+
             <p>{message}</p>
         </div>
     );

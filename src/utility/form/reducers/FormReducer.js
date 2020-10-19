@@ -1,6 +1,7 @@
 // Utilities
 import validator from '../../Validator';
 import {
+    MAP_STATE_WITH_STORE,
     INPUT_CHANGE,
     CONFIRM_PASSWORD_INPUT_CHANGE,
     PASSWORD_INPUT_CHANGE,
@@ -15,13 +16,15 @@ import {
  * @returns {Object} Updated state object
  */
 
-const FormFieldReducer = (state = {}, action) => {
-    const { name, value, type } = action || {};
+const FormReducer = (state = {}, action) => {
+    const { name, value, type, updatedFormState } = action || {};
 
     const fieldData = name in state ? state[name] : {};
     const { validationRules } = fieldData || {};
 
     switch (type) {
+        case MAP_STATE_WITH_STORE:
+            return { ...updatedFormState };
         case INPUT_CHANGE:
             return {
                 ...state,
@@ -70,4 +73,4 @@ const FormFieldReducer = (state = {}, action) => {
     }
 };
 
-export default FormFieldReducer;
+export default FormReducer;

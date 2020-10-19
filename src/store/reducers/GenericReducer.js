@@ -1,7 +1,7 @@
 /**
  * Generic reducer
  *
- * @param {ActionType}* identifier Unique action type
+ * @param {String}* identifier Unique action type
  */
 
 function GenericReducer(identifier) {
