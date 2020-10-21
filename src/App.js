@@ -1,12 +1,18 @@
 import React from 'react';
-import './App.css';
 import User from './components/user';
+import Layout from './components/layout';
+import Toaster from './components/generic/toaster';
+import './assets/sass/framework/main.scss';
+import './App.css';
 
 function App() {
     return (
-        <div className="App">
-            <User />
-        </div>
+        <>
+            <Layout>
+                <User />
+            </Layout>
+            <Toaster />
+        </>
     );
 }
 
