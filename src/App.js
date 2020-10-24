@@ -1,17 +1,20 @@
-import React from 'react';
-import User from './components/user';
-import Layout from './components/layout';
-import Toaster from './components/generic/toaster';
-import './assets/sass/framework/main.scss';
-import './App.css';
+import React, { useState } from 'react';
+import NumberFormat from 'react-number-format';
 
 function App() {
+    const [value, setValue] = useState('');
+
     return (
         <>
-            <Layout>
-                <User />
-            </Layout>
-            <Toaster />
+            <NumberFormat
+                value={value}
+                displayType={'number'}
+                thousandSeparator={true}
+                onValueChange={(e) => {
+                    const { value } = e || {};
+                    setValue(value);
+                }}
+            />
         </>
     );
 }
