@@ -1,0 +1,116 @@
+/* Module imports */
+@import "../../assets/sass/framework/modules/color";
+@import "../../assets/sass/framework/modules/breakpoints";
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $primary;
+	height: 10vh;
+
+	.header__left {
+		.logo__container {
+			height: auto;
+			width: 200px;
+
+			.logo {
+				max-height: 100%;
+				max-width: 100%;
+			}
+		}
+
+		.hamburger__container {
+			display: none;
+			margin-left: 1rem;
+			color: $white;
+
+			.hamburger {
+				font-size: 1.5rem;
+			}
+		}
+	}
+
+	.header__right {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		.icons {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.icon__container {
+				color: #fff;
+				position: relative;
+				margin-right: 2rem;
+
+				.icon {
+					font-size: 1.2rem;
+				}
+
+				.lang__icon {
+					margin-right: 0.5rem;
+				}
+
+				.language {
+					font-size: 1.2rem;
+					font-weight: 400;
+				}
+
+				.dot {
+					height: 0.625rem;
+					width: 0.625rem;
+					border: 1px solid $white;
+					border-radius: 50%;
+					background-color: $white;
+					position: absolute;
+					margin: -0.625rem 0px 0px 0.8125rem;
+				}
+			}
+		}
+	}
+}
+
+/* Extra small devices  */
+@media only screen and (max-width: $breakpoint-xs) {
+	.header {
+		.header__left {
+			.logo__container {
+				display: none;
+			}
+
+			.hamburger__container {
+				display: flex;
+			}
+		}
+
+		.header__right {
+			.icons {
+				.icon__container {
+					margin-right: 1.5rem;
+
+					.icon {
+						font-size: 1rem;
+					}
+
+					.lang__icon {
+						margin-right: 0.25rem;
+					}
+
+					.language {
+						font-size: 1rem;
+					}
+
+					.dot {
+						height: 0.5rem;
+						width: 0.5rem;
+						margin: -0.625rem 0 0 0.75rem;
+					}
+				}
+			}
+		}
+	}
+}

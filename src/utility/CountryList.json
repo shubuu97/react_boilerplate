@@ -1,0 +1,17 @@
+[
+	{
+		"value" : 1,
+		"label" : "Germany",
+		"code" : "de"
+	},
+	{
+		"value" : 2,
+		"label" : "Austria",
+		"code" : "at"
+	},
+	{
+		"value" : 3,
+		"label" : "Switzerland",
+		"code" : "ch"
+	}
+]
